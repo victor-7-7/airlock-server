@@ -1,2 +1,24 @@
+
+headers: # headers key is where we set all of our rules for HTTP headers
+  # all indicates that the rules nested underneath will apply to all the subgraphs.
+  # We could specify which ones using the subgraphs key, but we know that
+  # for Airlock we'll need to pass it to all of them.
+  all:
+    # request specifies that the included headers should apply to
+    # requests the router receives.
+    request:
+      # we want to pass the Authorization header to all the subgraphs,
+      # so we'll use the propagate key (какие заголовки от клиента рутер
+      # должен передавать сабграф-серверам)
+      - propagate:
+          named: "Authorization"
+
 include_subgraph_errors:
   all: true # Propagate errors from all subgraphs
+
+cors:
+  origins:
+    # Allows any locally-running client to run against your Router
+    - http://localhost:3000
+    # Allows Apollo Studio to still run queries against your Router
+    - https://studio.apollographql.com
