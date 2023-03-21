@@ -42,11 +42,13 @@ const resolvers = {
       return user.role;
     },
   },
+
   Host: {
     __resolveReference: (user, { dataSources }) => {
       return dataSources.accountsAPI.getUser(user.id);
     },
   },
+
   Guest: {
     __resolveReference: (user, { dataSources }) => {
       return dataSources.accountsAPI.getUser(user.id);

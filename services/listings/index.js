@@ -2,7 +2,7 @@ const express = require('express');
 const { getDifferenceInDays, transformListingWithAmenities } = require('./helpers');
 const { v4: uuidv4 } = require('uuid');
 const app = express();
-const port = 4010 || process.env.PORT;
+const port = process.env.PORT || 4010;
 
 const listingsDb = require('./sequelize/models');
 app.use(express.json());
@@ -82,7 +82,7 @@ app.get('/listings/:listingId/totalCost', async (req, res) => {
   const { checkInDate, checkOutDate } = req.query;
   const diffInDays = getDifferenceInDays(checkInDate, checkOutDate);
 
-  if (diffInDays === NaN) {
+  if (isNaN(diffInDays)) {
     return res
       .status(400)
       .send('Could not calculate total cost. Please double check the check-in and check-out date format.');
