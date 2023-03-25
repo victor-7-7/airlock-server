@@ -1,7 +1,13 @@
 const { AuthenticationError, ForbiddenError } = require('./utils/errors');
 
 const resolvers = {
+
   Query: {
+    featuredListings: (_, __, { dataSources }) => {
+      const limit = 3;
+      return dataSources.listingsAPI.getFeaturedListings(limit);
+    },
+
     searchListings: async (_, { criteria }, { dataSources }) => {
       const { numOfBeds, checkInDate, checkOutDate, page, limit, sortBy } = criteria;
       const listings = await dataSources.listingsAPI.getListings({ numOfBeds, page, limit, sortBy });
@@ -31,11 +37,6 @@ const resolvers = {
 
     listing: (_, { id }, { dataSources }) => {
       return dataSources.listingsAPI.getListing(id);
-    },
-
-    featuredListings: (_, __, { dataSources }) => {
-      const limit = 3;
-      return dataSources.listingsAPI.getFeaturedListings(limit);
     },
 
     listingAmenities: (_, __, { dataSources }) => {
@@ -117,18 +118,18 @@ const resolvers = {
       return { id: hostId };
     },
 
-    totalCost: async ({ id }, { checkInDate, checkOutDate }, { dataSources }) => {
-      const { totalCost } = await dataSources.listingsAPI.getTotalCost({ id, checkInDate, checkOutDate });
-      return totalCost;
+    numberOfUpcomingBookings: async ({ id }, _, { dataSources }) => {
+      const bookings = (await dataSources.bookingsDb.getBookingsForListing(id, 'UPCOMING')) || [];
+      return bookings.length;
     },
 
     currentlyBookedDates: ({ id }, _, { dataSources }) => {
       return dataSources.bookingsDb.getCurrentlyBookedDateRangesForListing(id);
     },
 
-    numberOfUpcomingBookings: async ({ id }, _, { dataSources }) => {
-      const bookings = (await dataSources.bookingsDb.getBookingsForListing(id, 'UPCOMING')) || [];
-      return bookings.length;
+    totalCost: async ({ id }, { checkInDate, checkOutDate }, { dataSources }) => {
+      const { totalCost } = await dataSources.listingsAPI.getTotalCost({ id, checkInDate, checkOutDate });
+      return totalCost;
     },
   },
 

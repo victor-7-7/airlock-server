@@ -20,7 +20,7 @@ async function startApolloServer() {
     }),
   });
 
-  const port = 4002;
+  const port = 4001;
   const subgraphName = 'accounts';
 
   try {

@@ -4,6 +4,13 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 const port = process.env.PORT || 4010;
 
+// listingsDb --> db --> {
+//  "Listing": Listing,
+//  "Amenity": Amenity,
+//  "ListingAmenities": ListingAmenities,
+//  "sequelize": sequelize, // Экземпляр класса Sequelize
+//  "Sequelize": Sequelize
+// }
 const listingsDb = require('./sequelize/models');
 app.use(express.json());
 

@@ -1,18 +1,16 @@
 {
-  "name": "airlock-course2-starter",
+  "name": "common",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "engines": {
     "npm": ">=6.0.0",
     "node": ">=14.0.0 <=18"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "launch": "node utils/launch.js",
+    "launch": "node ./utils/launch.js",
     "postinstall": "npm run install-services",
-    "install-services": "node utils/install.js",
-    "db:reset": "node utils/reset.js"
+    "install-services": "node ./utils/install.js",
+    "db:reset": "node ./utils/reset.js"
   },
   "nodemonConfig": {
     "ext": "*.js, *.graphql"

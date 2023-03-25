@@ -22,6 +22,16 @@ type Mutation {
     updateListing(listingId: ID!, listing: UpdateListingInput!): UpdateListingResponse!
 }
 
+"Represents an Airlock user's common properties"
+interface User {
+    id: ID!
+}
+
+"A host is a type of Airlock user. They own listings."
+type Host implements User @key(fields: "id", resolvable: false) {
+    id: ID!
+}
+
 "A listing is a location owned by a host. A listing has a list of amenities it offers. Listings have a fixed cost per night value."
 type Listing @key(fields: "id") {
     id: ID!
@@ -137,15 +147,6 @@ input UpdateListingInput {
     amenities: [ID]
 }
 
-interface MutationResponse {
-    "Similar to HTTP status code, represents the status of the mutation"
-    code: Int!
-    "Indicates whether the mutation was successful"
-    success: Boolean!
-    "Human-readable message for the UI"
-    message: String!
-}
-
 "Response after creating a listing"
 type CreateListingResponse implements MutationResponse {
     "Similar to HTTP status code, represents the status of the mutation"
@@ -170,12 +171,12 @@ type UpdateListingResponse implements MutationResponse {
     listing: Listing
 }
 
-"Represents an Airlock user's common properties"
-interface User {
-    id: ID!
+interface MutationResponse {
+    "Similar to HTTP status code, represents the status of the mutation"
+    code: Int!
+    "Indicates whether the mutation was successful"
+    success: Boolean!
+    "Human-readable message for the UI"
+    message: String!
 }
 
-"A host is a type of Airlock user. They own listings."
-type Host implements User @key(fields: "id") {
-    id: ID!
-}

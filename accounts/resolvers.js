@@ -1,6 +1,7 @@
 const { AuthenticationError } = require('./utils/errors');
 
 const resolvers = {
+
   Query: {
     user: async (_, { id }, { dataSources }) => {
       const user = await dataSources.accountsAPI.getUser(id);
@@ -9,6 +10,7 @@ const resolvers = {
       }
       return user;
     },
+
     me: async (_, __, { dataSources, userId }) => {
       if (!userId) throw AuthenticationError();
       const user = await dataSources.accountsAPI.getUser(userId);

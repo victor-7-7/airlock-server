@@ -1,8 +1,11 @@
 'use strict';
 const { Model } = require('sequelize');
-const { Listing } = require('./listing');
 module.exports = (sequelize, DataTypes) => {
-  class Amenity extends Model {}
+  class Amenity extends Model {
+    static associate(models) {
+      Amenity.belongsToMany(models.Listing, { through: models.ListingAmenities });
+    }
+  }
 
   Amenity.init(
     {

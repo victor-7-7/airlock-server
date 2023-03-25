@@ -5,7 +5,8 @@ const { buildSubgraphSchema } = require('@apollo/subgraph');
 const { readFileSync } = require('fs');
 const axios = require('axios');
 const gql = require('graphql-tag');
-const ListingsAPI = require("./datasources/listings")
+const ListingsAPI = require("./datasources/listings");
+const BookingsDataSource = require('../bookings/datasources/bookings');
 
 const { AuthenticationError } = require('./utils/errors');
 
@@ -42,6 +43,7 @@ async function startApolloServer() {
           ...userInfo,
           dataSources: {
             listingsAPI: new ListingsAPI(),
+            bookingsDb: new BookingsDataSource(),
           },
         };
       },

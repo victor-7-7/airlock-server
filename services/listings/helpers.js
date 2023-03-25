@@ -13,8 +13,23 @@ const getDifferenceInDays = (checkIn, checkOut) => {
 const transformListingWithAmenities = (listingInstance) => {
   // Amenities and ListingAmenities need to be converted to just `amenities`
   const listing = listingInstance.toJSON();
+  // console.log("__SSS", listing);
+  // listing = {
+  //  id: 'listing-4',
+  //  ...
+  //  Amenities: [
+  //    {
+  //      id: 'am-1',
+  //      category: 'Accommodation Details',
+  //      name: 'Interdimensional wifi',
+  //      ListingAmenities: [Object]
+  //    },
+  //    ...
+  //  ],
+  // }
+  // *** Извлекаем свойство Amenities
   const { Amenities, ...listingPropertiesToReturn } = listing;
-
+  // *** Убираем из каждого элемента ненужное свойство ListingAmenities
   const amenities = Amenities.map((a) => {
     const { ListingAmenities, ...amenitiesToReturn } = a;
     return amenitiesToReturn;

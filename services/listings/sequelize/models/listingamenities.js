@@ -8,14 +8,14 @@ module.exports = (sequelize, DataTypes) => {
       ListingId: {
         type: DataTypes.STRING,
         references: {
-          model: 'Listings',
+          model: 'Listing',
           key: 'id',
         },
       },
       AmenityId: {
         type: DataTypes.STRING,
         references: {
-          model: 'Amenities',
+          model: 'Amenity',
           key: 'id',
         },
       },
