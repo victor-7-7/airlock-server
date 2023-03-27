@@ -24,7 +24,6 @@ async function startApolloServer() {
     }),
   });
 
-  // const port = 4000; // <-- монолит
   const port = 4002; // <-- сабграф, а на 4000 будет сидеть Router
 
   try {

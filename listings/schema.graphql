@@ -1,6 +1,6 @@
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.0",
-        import: ["@key"])
+        import: ["@key", "@shareable"])
 
 type Query {
     "A curated array of listings to feature on the homepage"
@@ -32,6 +32,12 @@ type Host implements User @key(fields: "id", resolvable: false) {
     id: ID!
 }
 
+"Coordinates in the galaxy"
+type GalacticCoordinates @shareable {
+    latitude: Float!
+    longitude: Float!
+}
+
 "A listing is a location owned by a host. A listing has a list of amenities it offers. Listings have a fixed cost per night value."
 type Listing @key(fields: "id") {
     id: ID!
@@ -57,6 +63,8 @@ type Listing @key(fields: "id") {
     currentlyBookedDates: [ReservedDate]!
     "Calculated total cost of the listing with the given arguments"
     totalCost(checkInDate: String!, checkOutDate: String!): Float!
+    "Where this listing is located in the galaxy"
+    coordinates: GalacticCoordinates
 }
 
 "A booking is reserved for a certain date range, marked by the checkInDate and checkOutDate fields"

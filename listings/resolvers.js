@@ -131,6 +131,10 @@ const resolvers = {
       const { totalCost } = await dataSources.listingsAPI.getTotalCost({ id, checkInDate, checkOutDate });
       return totalCost;
     },
+
+    coordinates: (listing, { dataSources }) => {
+      return dataSources.listingsAPI.getListingCoordinates(listing.id);
+    },
   },
 
   AmenityCategory: {
