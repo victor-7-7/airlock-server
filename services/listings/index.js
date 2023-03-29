@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 const port = process.env.PORT || 4010;
 
+const listingsDb = require('./sequelize/models');
 // listingsDb --> db --> {
 //  "Listing": Listing,
 //  "Amenity": Amenity,
@@ -11,7 +12,6 @@ const port = process.env.PORT || 4010;
 //  "sequelize": sequelize, // Экземпляр класса Sequelize
 //  "Sequelize": Sequelize
 // }
-const listingsDb = require('./sequelize/models');
 app.use(express.json());
 
 app.get('/', (req, res) => {
@@ -153,6 +153,15 @@ app.patch('/listings/:listingId', async (req, res) => {
   const listingToReturn = transformListingWithAmenities(updatedListing);
 
   return res.json(listingToReturn);
+});
+
+app.get('/listing/:listingId/coordinates', async (req, res) => {
+  // todo: get more realistic data
+  return {
+    latitude: 50.09,
+    longitude: 10.32,
+    nickname: "Planet Z"
+  }
 });
 
 app.listen(port, () => {

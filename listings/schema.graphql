@@ -36,6 +36,7 @@ type Host implements User @key(fields: "id", resolvable: false) {
 type GalacticCoordinates @shareable {
     latitude: Float!
     longitude: Float!
+    nickname: String
 }
 
 "A listing is a location owned by a host. A listing has a list of amenities it offers. Listings have a fixed cost per night value."

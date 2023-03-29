@@ -48,6 +48,15 @@ app.patch('/user/:userId', async (req, res) => {
   return res.json(user);
 });
 
+app.get('/listing/:userId/coordinates', async (req, res) => {
+  // todo: get more realistic data
+  return {
+    latitude: 86.17,
+    longitude: 91.32,
+    nickname: "Planet X"
+  }
+});
+
 app.listen(port, () => {
   console.log(`UserAccountsAPI running at http://localhost:${port}`);
 });
