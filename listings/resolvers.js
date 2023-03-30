@@ -3,9 +3,9 @@ const { AuthenticationError, ForbiddenError } = require('./utils/errors');
 const resolvers = {
 
   Query: {
-    featuredListings: (_, __, { dataSources }) => {
-      const limit = 3;
-      return dataSources.listingsAPI.getFeaturedListings(limit);
+    featuredListings: (_, { limit }, { dataSources }) => {
+      // default limit --> 8
+      return  dataSources.listingsAPI.getFeaturedListings(limit);
     },
 
     searchListings: async (_, { criteria }, { dataSources }) => {

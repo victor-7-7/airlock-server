@@ -3,8 +3,8 @@ extend schema
         import: ["@key", "@shareable"])
 
 type Query {
-    "A curated array of listings to feature on the homepage"
-    featuredListings: [Listing!]!
+    "A curated array of listings packages to feature on the homepage"
+    featuredListings(limit: Int = 8): [Listing!]!
     "Search results for listings that fit the criteria provided"
     searchListings(criteria: SearchListingsInput): [Listing]!
     "Return the listings that belong to the currently logged-in host"
